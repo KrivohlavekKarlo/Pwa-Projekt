@@ -1,0 +1,85 @@
+
+*{
+    font-family: 'Oswald', sans-serif;
+}
+img{
+    width: 100%;
+}
+
+.logo{
+    width: 90px;
+    float: left;
+    height: 120px;
+    
+}
+
+header{
+    width: 85%;
+    margin: 0 auto;
+}
+
+main{
+    width: 70%;
+    margin: 0 auto;
+
+
+}
+
+h3{
+    font-weight: bold;
+}
+
+h1{
+    font-weight: bolder;
+    font-style: italic;
+}
+p{
+    
+    text-transform: uppercase;
+    color: red;
+    
+}
+.font{
+    font-family:'Times New Roman', Times, serif;
+    text-transform: unset;
+    color: black;
+}
+
+.obojan{
+    color: red;
+}
+
+
+.clear{
+    clear: both;
+}
+ul{
+    list-style-type:none;
+}
+li a {
+    display: block;
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 50px;
+    text-decoration: none;
+    color: black;
+
+
+    font-weight: bold;
+}
+
+li:hover{
+    text-decoration: none;
+    color: black;
+}
+.naslov{
+    padding-left: 100px;
+}
+
+
+
+footer{
+    margin: 0 auto;
+    text-align: center;
+}
