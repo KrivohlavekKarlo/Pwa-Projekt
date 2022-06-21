@@ -16,6 +16,8 @@
         $about=$_POST['about'];
         $image=$_POST['pphoto'];
         $content=$_POST['content'];  
+
+        
 ?>
 
 

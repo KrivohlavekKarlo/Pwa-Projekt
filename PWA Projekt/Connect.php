@@ -11,4 +11,5 @@ mysqli_set_charset($dbc, "utf8");
 // Check connection
 if ($dbc) {
 echo "Connected successfully";
-}?>
+}
+?>

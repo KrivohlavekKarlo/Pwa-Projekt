@@ -1,13 +1,28 @@
 
 <?php include 'Connect.php'; 
 
+$id = '';
 
-$id = $_GET['id'];
+define('UPLPATH', '');
 
-$sql = "SELECT * FROM vijesti WHERE id = '$id'";
-$result = $dbc->query($sql);
-while($row = $result->fetch_assoc()) {
-    $category = $row['kategorija'];}
+
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    $sql = "SELECT * FROM vijesti WHERE id = '$id'";
+    $result = $dbc->query($sql);
+
+    while($row = $result->fetch_assoc()) {
+        $id = $row['id'];
+        $datum = $row['datum'];
+        $naslov = $row['naslov'];
+        $sazetak = $row['sazetak'];
+        $slika = UPLPATH . $row['slika'];
+        $kategorija = $row['kategorija'];
+        $tekst = $row['tekst'];
+    }
+} 
+
 
   
     ?>
@@ -16,7 +31,7 @@ while($row = $result->fetch_assoc()) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -24,6 +39,8 @@ while($row = $result->fetch_assoc()) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet"> 
+<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
     
@@ -59,46 +76,39 @@ while($row = $result->fetch_assoc()) {
             <section role="main">
                 <div class="row">
                 <h2 class="category">
-                    <?php
-                    $result = $dbc->query($sql);
-                    while($row = $result->fetch_assoc()) {
-                        echo "<span>".$row['kategorija']."</span>";}
-                        ?></h2>
-                    <h1 class="title"><?php
-                    while($row = $result->fetch_assoc()) {
-                        echo $row['naslov'];}
-                        ?></h1>
-                    <p>AUTOR:</p>
+                    <?php echo $kategorija; ?>
+                </h2>
+                <h1 class="title">
+                    <?php echo $naslov; ?>
+                </h1>
+                    <p>AUTOR: admin</p>
                     <p>OBJAVLJENO: <?php
-                    while($row = $result->fetch_assoc()) {
-                        echo "<span>".$row['datum']."</span>";}
+                    echo $datum;
                         ?></p>
                     </div>
                     <section class="slika">
-                    <?php
-                    while($row = $result->fetch_assoc()) {
-                        echo '<img src="' . UPLPATH . $row['slika'] . '">';}
-                    ?>
+                        <img src="<?php echo $slika; ?>" alt="#">
                     </section>
+                    
                     <section class="about">
                     <p>
                         <?php
-                        while($row = $result->fetch_assoc()) {
-                            echo "<i>".$row['sazetak']."</i>";}
+                       echo $sazetak;
                         ?>
                     </p>
                     </section>
                     <section class="sadrzaj">
                         <p>
                             <?php
-                            while($row = $result->fetch_assoc()) {
-                            echo $row['tekst'];}
+                            echo $tekst;
                             ?>
                         </p>
                     </section>
 
                 
                 </section>
+
+               
             
         
             </main>
