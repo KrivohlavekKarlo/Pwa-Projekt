@@ -1,5 +1,24 @@
 
+<?php
+include 'Connect.php';
+define('UPLPATH', '');
 
+$sport = [];
+$kultura = [];
+
+$sql = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = 'sport' ORDER BY id DESC LIMIT 3";
+$result = $dbc->query($sql);
+while($row = $result->fetch_assoc()) {
+    $sport[] = $row;
+}
+
+$sql = "SELECT * FROM vijesti WHERE arhiva = 0 AND kategorija = 'kultura'  ORDER BY id DESC LIMIT 3";
+$result = $dbc->query($sql);
+while($row = $result->fetch_assoc()) {
+    $kultura[] = $row;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,15 +47,15 @@
                         <li>
                             <a href="kategorija.php?id=sport" class="">Sport</a>
                         </li>
+                        <li>
+                        <li>
                             <a href="kategorija.php?id=kultura" class="">Kultura</a>
                         </li>
                         <li>
                             <a href="administracija.php" class="">Administracija</a>
                         </li>
                        
-                        <li>
-                            <a href="clanak.php " class="">Clanak</a>
-                        </li>
+                        
                         <li>
                             <a href="unos.php " class="">Unos</a>
                         </li>
@@ -46,73 +65,33 @@
 
         <div class="clear"></div>
         
-        <h1 class="naslov">POLITIK ></h1>
+        <h1 class="naslov">SPORT ></h1>
         <div class="container">
             <div class="row">
-              <div class="col-sm-4">
-                <img src="trump.jpg">
-                <p>Lorem ipsum dolor..</p>
-                <h3>Column 2</h3>
-              </div>
-              <div class="col-sm-4">
-                <img src="trump.jpg">
-                <p>Lorem ipsum dolor..</p>
-                <h3>Column 2</h3>
-              </div>
-              <div class="col-sm-4">
-                <img src="trump.jpg">
-                <p>Lorem ipsum dolor..</p>
-                <h3>Column 2</h3>
-              </div>
-            </div>
-          </div>
 
-          <h1 class="naslov">GESUNDHEIT ></h1>
-            <div class="container">
+            <?php foreach($sport as $sport_clanak){ ?>
+                <div class="col-sm-4">
+                    <img src="<?php echo $sport_clanak["slika"];?> ">
+                    <p><?php echo $sport_clanak["naslov"];?></p>
+                    <h3><?php echo $sport_clanak["sazetak"];?></h3>
+                </div>
+            <?php } ?>
+            </div>
+        </div>
+
+          <h1 class="naslov">KULTURA ></h1>
+        <div class="container">
             <div class="row">
-              <div class="col-sm-4">
-                <img src="trump.jpg">
-                <p>Lorem ipsum dolor..</p>
-                <h3>Column 2</h3>
-              </div>
-              <div class="col-sm-4">
-                <img src="trump.jpg">
-                <p>Lorem ipsum dolor..</p>
-                <h3>Column 2</h3>
-              </div>
-              <div class="col-sm-4">
-                <img src="trump.jpg">
-                <p>Lorem ipsum dolor..</p>
-                <h3>Column 2</h3>
-              </div>
+              <?php foreach($kultura as $kultura_clanak){ ?>
+                <div class="col-sm-4">
+                    <img src="<?php echo $kultura_clanak["slika"];?> ">
+                    <p><?php echo $kultura_clanak["naslov"];?></p>
+                    <h3><?php echo $kultura_clanak["sazetak"];?></h3>
+                </div>
+            <?php } ?>
+              
             </div>
-          </div>
-
-
-          <?php
-include 'Connect.php';
-define('UPLPATH', '');
-?>
-<section class="sport">
-<?php
-$query = "SELECT * FROM vijesti WHERE arhiva=0 AND kategorija='sport' LIMIT 4";
-$result = mysqli_query($dbc, $query);
-$i=0;
-while($row = mysqli_fetch_array($result)) {
-echo '<article>';
-echo'<div class="article">';
-echo '<div class="sport_img">';
-echo '<img src="' . UPLPATH . $row['slika'] . '"';
-echo '</div>';
-echo '<div class="media_body">';
-echo '<h4 class="title">';
-echo '<a href="clanak.php?id='.$row['id'].'">';
-echo $row['naslov'];
-echo '</a></h4>';
-echo '</div></div>';
-echo '</article>';
-}?>
-</section>
+        </div>
 
 
     </main>
